@@ -65,8 +65,8 @@ def process(i):
                 item['发布评论者ID'] = mid
                 item['发布评论者性别'] = sex
                 postInfo.insert(item)
-    except Exception as e:
-        logging.info('AV'+str(i)+"错误"+e)
+    except Exception:
+        logging.info('AV'+str(i)+"错误")
         pass
 
 result = pool.map(process, list(range(1,9999999)))
