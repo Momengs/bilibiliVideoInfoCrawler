@@ -68,7 +68,7 @@ def process(i):
                 yield item
     except Exception as e:
         logging.info('AV'+str(i)+"错误"+e)
-        continue
+        pass
 
 result = pool.map(process, list(range(1,9999999)))
 pool.close()
