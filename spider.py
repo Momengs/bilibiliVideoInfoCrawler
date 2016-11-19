@@ -9,13 +9,13 @@ from multiprocessing.dummy import Pool as ThreadPool
 
 connection = pymongo.MongoClient()
 tdb = connection.text
-post_info = tdb.bilibiliVideo
+postInfo = tdb.bilibiliVideo
 logging.basicConfig(level=logging.DEBUG,
                 format='%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s',
                 datefmt='%a, %d %b %Y %H:%M:%S',
                 filename='log.log',
                 filemode='w+')
-pool=ThreadPool(4)
+pool = ThreadPool(4)
 
 def process(i):
     getStat = requests.get('http://api.bilibili.com/archive_stat/stat?aid='+str(i)).text
@@ -64,7 +64,7 @@ def process(i):
                 item['发布评论者'] = uname
                 item['发布评论者ID'] = mid
                 item['发布评论者性别'] = sex
-                post_info(item)
+                postInfo(item)
                 yield item
     except Exception as e:
         logging.info('AV'+str(i)+"错误"+e)
