@@ -15,7 +15,7 @@ logging.basicConfig(level=logging.DEBUG,
                 datefmt='%a, %d %b %Y %H:%M:%S',
                 filename='log.log',
                 filemode='w+')
-pool = ThreadPool(4)
+pool = ThreadPool(8)
 
 def process(i):
     getStat = requests.get('http://api.bilibili.com/archive_stat/stat?aid='+str(i)).text
@@ -64,8 +64,7 @@ def process(i):
                 item['发布评论者'] = uname
                 item['发布评论者ID'] = mid
                 item['发布评论者性别'] = sex
-                postInfo(item)
-                yield item
+                postInfo.insert(item)
     except Exception as e:
         logging.info('AV'+str(i)+"错误"+e)
         pass
